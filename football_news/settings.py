@@ -20,6 +20,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 PRODUCTION = os.getenv('PRODUCTION', 'False').lower() == 'true'
 
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SAMESITE = 'None'
+
+SESSION_COOKIE_SAMESITE = 'None'
+
 
 CSRF_TRUSTED_ORIGINS = [
     'http://heraldo-arman-footballnews.pbp.cs.ui.ac.id',
@@ -35,7 +47,7 @@ SECRET_KEY = 'django-insecure-r4(0w97o()zdhgt0%+s8&a=t)vw707p+myqrqd_po^@c!x$vf$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "heraldo-arman-footballnews.pbp.cs.ui.ac.id"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "heraldo-arman-footballnews.pbp.cs.ui.ac.id", "10.0.2.2"]
 
 
 # Application definition
@@ -48,9 +60,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'authentication',
+    'corsheaders',
+    
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -153,3 +169,5 @@ else:
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
